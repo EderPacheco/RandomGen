@@ -26,7 +26,7 @@ generateButton.addEventListener("click", (event) => {
       break;
     case "name":
       const nameCount = parseInt(document.getElementById("name-count").value);
-      result = generateNamesList(nameCount);
+      result = generarNombre(nameCount);
       break;
     case "string":
       const cant= parseInt(document.getElementById("string-count").value);
@@ -90,7 +90,8 @@ generateButton.addEventListener("click", (event) => {
         result = generaCoordinateList(coordinateCount);
         break;
   }
-  generatorResultContainer.innerHTML = `<p>${result.join(", ")}</p>`;
+  const separador = document.getElementById("separador").value;
+  generatorResultContainer.innerHTML = `<p>${result.join(separador)}</p>`;
 });
 function generateEmails(count, domain) {
   const emails = [];
@@ -292,23 +293,27 @@ function generateNames(length) {
    }else {
      for (let i = 0; i < timeCant; i++) {
         hora = parseInt(generateRandomInteger(hour, hourM));
-
        if (hora == hourM) {
-            minuto = parseInt(generateRandomInteger(minuto, 59));
+        minuto = parseInt(generateRandomInteger(minut, 59));  
        }
        if (hora == hour) {
-           minuto = parseInt(generateRandomInteger(0, minutM));
-
+           minuto = parseInt(generateRandomInteger(0, minutM));     
        }
+       if(hour == hourM){
+        minuto = parseInt(generateRandomInteger(minut, minutM));
+      } 
+      segundo=parseInt(generateRandomInteger(0, 59));
        if (minuto == minutM) {
-        segundo = parseInt(generateRandomInteger(sec, 59));
+        segundo = parseInt(generateRandomInteger(0, secM));
        }
        if (minuto == minut) {
-
-            segundo = parseInt(generateRandomInteger(0, secM));
+        segundo = parseInt(generateRandomInteger(sec, 59));
        }
-       minuto = parseInt(generateRandomInteger(0, 59));
-       segundo = parseInt(generateRandomInteger(0, 59));
+       if(minut == minutM){
+        segundo = parseInt(generateRandomInteger(sec, secM));
+        }
+       
+       
        const time = `${hora}:${minuto}:${segundo}`;
        listaT.push(time);
      }
